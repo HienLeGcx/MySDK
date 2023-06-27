@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 plugins {
     kotlin("multiplatform")
+    kotlin("native.cocoapods")
     id("com.android.library")
     id("maven-publish")
 }
@@ -31,6 +32,32 @@ kotlin {
             baseName = "shared"
             xcf.add(this)
         }
+    }
+
+    cocoapods {
+        // Required properties
+        // Specify the required Pod version here. Otherwise, the Gradle project version is used.
+        version = "1.0.0"
+        summary = "Some description of the module"
+        homepage = "Link to the repository"
+
+        // Optional properties
+        // Configure the Pod name here instead of changing the Gradle project name
+        name = "MySdkKmm"
+
+        framework {
+            // Required properties
+            // Framework name configuration. Use this property instead of deprecated 'frameworkName'
+            baseName = "mySdk"
+
+            // Optional properties
+            // Specify the framework linking type. It's dynamic by default.
+            isStatic = false
+        }
+
+        // Maps custom Xcode configuration to NativeBuildType
+        xcodeConfigurationToNativeBuildType["DEBUG"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["RELEASE"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
     }
 
     sourceSets {
