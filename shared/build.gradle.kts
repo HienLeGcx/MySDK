@@ -3,6 +3,13 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("maven-publish")
+}
+
+repositories {
+    google()
+    mavenCentral()
+    mavenLocal()
 }
 
 kotlin {
@@ -63,4 +70,5 @@ android {
         minSdk = 26
         targetSdk = 33
     }
+    apply(from = "$rootDir/publish.gradle")
 }
