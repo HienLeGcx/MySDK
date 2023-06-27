@@ -4,8 +4,8 @@ def LIB_GROUP_ID = 'com.hien.le'
 def LIB_ARTIFACT_ID = 'mysdk'
 def LIB_VERSION = '1.0.0'
 def LIB_VERSION_SNAPSHOT = '1.0.0-SNAPSHOT'
-def USER_NAME = System.getenv("GITHUB_ACTOR")
-def PASSWORD = System.getenv("GITHUB_TOKEN")
+def USER_NAME = project.findProperty("github.user") ?: System.getenv("GITHUB_ACTOR")
+def PASSWORD = project.findProperty("github.token") ?: System.getenv("GITHUB_TOKEN")
 
 
 android {
